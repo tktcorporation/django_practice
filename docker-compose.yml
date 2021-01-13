@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  app:
+    build: ./app
+    working_dir: /app
+    command: "/bin/sh -c 'python manage.py runserver 0:8000'"
+    environment:
+      - PYTHONPATH=/app
+      - MYPYPATH=out
+    volumes:
+      - ./app:/app:cached
+      - /var/lib/data/
+      - /app/.tox/
+      - /app/__pycache__/
+      - /app/.mypy_cache/
+      - /app/.pytest_cache/
+    ports:
+      - "8000:8000"
